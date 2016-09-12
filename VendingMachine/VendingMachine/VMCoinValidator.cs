@@ -8,9 +8,14 @@ namespace VendingMachine
 {
     public class VMCoinValidator
     {
-        public bool ValidateCoin()
+        public bool ValidateCoin(String coinToValidate)
         {
-            return true;
+            switch (coinToValidate)
+            {
+                default:
+                    return false;                    
+            }
+            
         }
     }
 }

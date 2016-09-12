@@ -8,10 +8,10 @@ namespace VendingMachineTests
     public class VMCoinValidatorTest
     {
         [TestMethod]
-        public void TestCoinValidatorReturnsTrueWhenAValidCoinIsPassedIn()
+        public void TestCoinValidatorReturnsFalseWhenInvalidCoinIsPassedIn()
         {
             VMCoinValidator testValidator = new VMCoinValidator();
-            Assert.IsTrue(testValidator.ValidateCoin());
+            Assert.IsFalse(testValidator.ValidateCoin("Coin"));
         }
     }
 }
