@@ -11,7 +11,28 @@ namespace VendingMachineTests
         public void TestCoinValidatorReturnsFalseWhenInvalidCoinIsPassedIn()
         {
             VMCoinValidator testValidator = new VMCoinValidator();
-            Assert.IsFalse(testValidator.ValidateCoin("Coin"));
+            Assert.IsFalse(testValidator.ValidateCoin("Penny"));
+        }
+
+        [TestMethod]
+        public void TestCoinValidatorReturnsTrueWhenQuarterPassedIn()
+        {
+            VMCoinValidator testValidator = new VMCoinValidator();
+            Assert.IsTrue(testValidator.ValidateCoin("Quarter"));
+        }
+
+        [TestMethod]
+        public void TestCoinValidatorReturnsTrueWhenDimePassedIn()
+        {
+            VMCoinValidator testValidator = new VMCoinValidator();
+            Assert.IsTrue(testValidator.ValidateCoin("Dime"));
+        }
+
+        [TestMethod]
+        public void TestCoinValidatorReturnsTrueWhenNIckelPassedIn()
+        {
+            VMCoinValidator testValidator = new VMCoinValidator();
+            Assert.IsTrue(testValidator.ValidateCoin("Nickel"));
         }
     }
 }
