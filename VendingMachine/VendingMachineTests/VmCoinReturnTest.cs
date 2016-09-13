@@ -7,27 +7,25 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinReturnTest
     {
+        private readonly VmCoinReturn _coinReturn = new VmCoinReturn();
 
-        
         [TestMethod]
         public void WhenCoinReturnIsPassedACoinItIsAddedToListOfCoinsInReturn()
         {
-            VmCoinReturn coinReturn = new VmCoinReturn();
-            Assert.AreEqual(0, coinReturn.coinsInReturn.Count);
+            Assert.AreEqual(0, _coinReturn.CoinsInReturn.Count);
             string rejectedCoinToTest = "Coin";
-            coinReturn.ReceiveCoin(rejectedCoinToTest);
-            Assert.AreEqual(1,coinReturn.coinsInReturn.Count);
+            _coinReturn.ReceiveCoin(rejectedCoinToTest);
+            Assert.AreEqual(1,_coinReturn.CoinsInReturn.Count);
         }
 
         [TestMethod]
         public void WhenCustomerTakesCoinsTheyAreRemovedFromList()
         {
-            VmCoinReturn coinReturn = new VmCoinReturn();
             string rejectedCoinToTest = "Coin";
-            coinReturn.ReceiveCoin(rejectedCoinToTest);
-            Assert.AreEqual(1, coinReturn.coinsInReturn.Count);
-            coinReturn.RemoveCoinsInReturn();
-            Assert.AreEqual(0, coinReturn.coinsInReturn.Count);
+            _coinReturn.ReceiveCoin(rejectedCoinToTest);
+            Assert.AreEqual(1, _coinReturn.CoinsInReturn.Count);
+            _coinReturn.RemoveCoinsInReturn();
+            Assert.AreEqual(0, _coinReturn.CoinsInReturn.Count);
         }
     }
 }

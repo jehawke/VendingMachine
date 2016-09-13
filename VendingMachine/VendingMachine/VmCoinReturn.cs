@@ -8,16 +8,16 @@ namespace VendingMachine
 {
     public class VmCoinReturn
     {
-        public List<string> coinsInReturn = new List<string>();
+        public List<string> CoinsInReturn = new List<string>();
 
         public void ReceiveCoin(string rejectedCoin)
         {
-            coinsInReturn.Add(rejectedCoin);
+            CoinsInReturn.Add(rejectedCoin);
         }
 
         public void RemoveCoinsInReturn()
         {
-            coinsInReturn.Clear();
+            CoinsInReturn.Clear();
         }
     }
 }

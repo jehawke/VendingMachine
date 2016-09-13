@@ -7,12 +7,12 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinSlotTest
     {
-        private string coinToSend;
+        private string _coinToSend;
 
         [TestMethod]
         public void TestCoinSlotSendsCoinsToValidator()
         {
-            coinToSend = "Quarter";
+            _coinToSend = "Quarter";
             VmCoinSlot coinSlot = new VmCoinSlot();
 
 

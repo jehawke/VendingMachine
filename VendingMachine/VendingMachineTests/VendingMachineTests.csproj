@@ -56,6 +56,7 @@
     <Compile Include="VmCoinReturnTest.cs" />
     <Compile Include="VmCoinSlotTest.cs" />
     <Compile Include="VmCoinValidatorTest.cs" />
+    <Compile Include="VmFoodDispenserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine\VendingMachine.csproj">
