@@ -5,52 +5,52 @@ using VendingMachine;
 namespace VendingMachineTests
 {
     [TestClass]
-    public class VMCoinValidatorTest
+    public class VmCoinValidatorTest
     {
-        private VMCoinValidator testValidator = new VMCoinValidator();
+        private readonly VmCoinValidator _testValidator = new VmCoinValidator();
 
         [TestMethod]
         public void TestCoinValidatorReturnsFalseWhenInvalidCoinIsPassedIn()
         {           
-            Assert.IsFalse(testValidator.ValidateCoin("Penny"));
-            Assert.AreEqual(0, testValidator.currentTransactionTotal);
+            Assert.IsFalse(_testValidator.ValidateCoin("Penny"));
+            Assert.AreEqual(0, _testValidator.currentTransactionTotal);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesQuarter()
         {
-            Assert.IsTrue(testValidator.ValidateCoin("Quarter"));
-            Assert.AreEqual(25, testValidator.currentTransactionTotal);
+            Assert.IsTrue(_testValidator.ValidateCoin("Quarter"));
+            Assert.AreEqual(25, _testValidator.currentTransactionTotal);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesDime()
         {
-            Assert.IsTrue(testValidator.ValidateCoin("Dime"));
-            Assert.AreEqual(10, testValidator.currentTransactionTotal);
+            Assert.IsTrue(_testValidator.ValidateCoin("Dime"));
+            Assert.AreEqual(10, _testValidator.currentTransactionTotal);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesNickel()
         {
-            Assert.IsTrue(testValidator.ValidateCoin("Nickel"));
-            Assert.AreEqual(5, testValidator.currentTransactionTotal);
+            Assert.IsTrue(_testValidator.ValidateCoin("Nickel"));
+            Assert.AreEqual(5, _testValidator.currentTransactionTotal);
         }
 
         [TestMethod]
         public void TestCoinValidatorCanHandleMultpleCoinsPerTransaction()
         {
-            testValidator.ValidateCoin("Quarter");
-            Assert.AreEqual(25, testValidator.currentTransactionTotal);
+            _testValidator.ValidateCoin("Quarter");
+            Assert.AreEqual(25, _testValidator.currentTransactionTotal);
 
-            testValidator.ValidateCoin("Dime");
-            Assert.AreEqual(35, testValidator.currentTransactionTotal);
+            _testValidator.ValidateCoin("Dime");
+            Assert.AreEqual(35, _testValidator.currentTransactionTotal);
 
-            testValidator.ValidateCoin("Penny");
-            Assert.AreEqual(35, testValidator.currentTransactionTotal);
+            _testValidator.ValidateCoin("Penny");
+            Assert.AreEqual(35, _testValidator.currentTransactionTotal);
 
-            testValidator.ValidateCoin("Nickel");
-            Assert.AreEqual(40, testValidator.currentTransactionTotal);
+            _testValidator.ValidateCoin("Nickel");
+            Assert.AreEqual(40, _testValidator.currentTransactionTotal);
         }
 
     }

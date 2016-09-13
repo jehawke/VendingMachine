@@ -5,15 +5,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace VendingMachineTests
 {
     [TestClass]
-    public class VMCoinSlotTest
+    public class VmCoinSlotTest
     {
+        private string coinToSend;
+
         [TestMethod]
-        public void TestCoinSlotAcceptsItems()
+        public void TestCoinSlotSendsCoinsToValidator()
         {
-            VMCoinSlot coinSlot = new VMCoinSlot();
-            Assert.IsFalse(coinSlot.bItemWasInserted);
-            coinSlot.sendInsertedItemToValidator();
-            Assert.IsTrue(coinSlot.bItemWasInserted);
+            coinToSend = "Quarter";
+            VmCoinSlot coinSlot = new VmCoinSlot();
+
+
         }
+
     }
 }

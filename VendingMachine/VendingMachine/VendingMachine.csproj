@@ -45,8 +45,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendingMachineMain.cs" />
-    <Compile Include="VMCoinSlot.cs" />
-    <Compile Include="VMCoinValidator.cs" />
+    <Compile Include="VmCoinReturn.cs" />
+    <Compile Include="VmCoinSlot.cs" />
+    <Compile Include="VmCoinValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

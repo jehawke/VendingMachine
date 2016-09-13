@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    public class VMCoinSlot
+    public class VmCoinSlot
     {
-        public bool bItemWasInserted = false;
+        private readonly VmCoinValidator _validator = new VmCoinValidator();
+        private bool bIsCoinValid = false;
 
-        public void sendInsertedItemToValidator()
+        public void ReceiveCoinAndSendToValidator()
         {
-            bItemWasInserted = true;
+  
         }
+
     }
 }

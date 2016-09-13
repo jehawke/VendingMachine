@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    public class VMCoinValidator
+    public class VmCoinValidator
     {
         private const string QUARTER_STRING = "Quarter" ;
         private const string DIME_STRING = "Dime";
