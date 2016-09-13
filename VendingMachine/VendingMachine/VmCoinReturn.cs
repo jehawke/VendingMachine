@@ -14,5 +14,10 @@ namespace VendingMachine
         {
             coinsInReturn.Add(rejectedCoin);
         }
+
+        public void RemoveCoinsInReturn()
+        {
+            coinsInReturn.Clear();
+        }
     }
 }
