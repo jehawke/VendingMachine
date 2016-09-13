@@ -37,5 +37,21 @@ namespace VendingMachineTests
             Assert.AreEqual(5, testValidator.currentTransactionTotal);
         }
 
+        [TestMethod]
+        public void TestCoinValidatorCanHandleMultpleCoinsPerTransaction()
+        {
+            testValidator.ValidateCoin("Quarter");
+            Assert.AreEqual(25, testValidator.currentTransactionTotal);
+
+            testValidator.ValidateCoin("Dime");
+            Assert.AreEqual(35, testValidator.currentTransactionTotal);
+
+            testValidator.ValidateCoin("Penny");
+            Assert.AreEqual(35, testValidator.currentTransactionTotal);
+
+            testValidator.ValidateCoin("Nickel");
+            Assert.AreEqual(40, testValidator.currentTransactionTotal);
+        }
+
     }
 }
