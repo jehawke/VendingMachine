@@ -47,6 +47,7 @@ namespace VendingMachineTests
         {
             VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Soda";
+            testFoodDispenser.Restock();
             string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Soda", dispensedItem);
         }
@@ -56,6 +57,7 @@ namespace VendingMachineTests
         {
             VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Chips";
+            testFoodDispenser.Restock();
             string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Chips", dispensedItem);
         }
@@ -65,8 +67,30 @@ namespace VendingMachineTests
         {
             VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Candy";
+            testFoodDispenser.Restock();
             string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Candy", dispensedItem);
+        }
+
+        [TestMethod]
+        public void TestFoodDispenserReturnsNullWhenItHasNoItemToDispense()
+        {
+            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
+            Assert.AreEqual(0,testFoodDispenser.Inventory.Count);
+            string itemToDispense = "Candy";
+            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            Assert.IsNull(dispensedItem);
+        }
+
+        [TestMethod]
+        public void TestFoodDispenserReturnsNullWhenPassedAnItemItWillNeverHaveInStock()
+        {
+            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
+            testFoodDispenser.Restock();
+            Assert.AreEqual(3, testFoodDispenser.Inventory.Count);
+            string itemToDispense = "Steak";
+            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            Assert.IsNull(dispensedItem);
         }
     }
 }

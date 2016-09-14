@@ -23,17 +23,17 @@ namespace VendingMachine
         
         public string Dispense(string itemToDispense)
         {
-            if (itemToDispense == SODA_STRING)
+            if (itemToDispense == SODA_STRING && _soda.Count > 0)
             {
                 _soda.Remove(SODA_STRING);
                 return itemToDispense;
             }
-            else if (itemToDispense == CHIPS_STRING)
+            else if (itemToDispense == CHIPS_STRING && _chips.Count > 0)
             {
                 _chips.Remove(CHIPS_STRING);
                 return itemToDispense;
             }
-            else if (itemToDispense == CANDY_STRING)
+            else if (itemToDispense == CANDY_STRING && _candy.Count > 0)
             {
                 _candy.Remove(CANDY_STRING);
                 return itemToDispense;
