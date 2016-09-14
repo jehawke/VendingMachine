@@ -8,9 +8,18 @@ namespace VendingMachine
 {
     public class VmFoodDispenser
     {
+        public List<string> Inventory = new List<string>();
+
+        
         public string Dispense(string itemToDispense)
         {
+            Inventory.Remove(itemToDispense);
             return itemToDispense;
+        }
+
+        public void Restock()
+        {
+            Inventory.Add("Soda");
         }
     }
 }
