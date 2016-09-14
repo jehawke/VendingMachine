@@ -7,89 +7,88 @@ namespace VendingMachineTests
     [TestClass]
     public class VmFoodDispenserTest
     {
+        VmFoodDispenser _testFoodDispenser;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _testFoodDispenser = new VmFoodDispenser();
+        }
 
         [TestMethod]
         public void TestItemsAreAddedToInventoryWhenRestockIsCalled()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
-            Assert.AreEqual(0,testFoodDispenser.Inventory.Count);
-            testFoodDispenser.Restock();
-            Assert.AreEqual(3,testFoodDispenser.Inventory.Count);
-            Assert.AreEqual(5,testFoodDispenser.Inventory[0].Count);
-            Assert.AreEqual(5, testFoodDispenser.Inventory[1].Count);
-            Assert.AreEqual(5, testFoodDispenser.Inventory[2].Count);
+            Assert.AreEqual(0,_testFoodDispenser.Inventory.Count);
+            _testFoodDispenser.Restock();
+            Assert.AreEqual(3,_testFoodDispenser.Inventory.Count);
+            Assert.AreEqual(5,_testFoodDispenser.Inventory[0].Count);
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[1].Count);
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[2].Count);
         }
 
         [TestMethod]
         public void TestItemsAreRemovedFromInventoryWhenDispensed()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
-            testFoodDispenser.Restock();
-            Assert.AreEqual(5, testFoodDispenser.Inventory[0].Count);
-            testFoodDispenser.Dispense("Soda");
-            Assert.AreEqual(4, testFoodDispenser.Inventory[0].Count);
+            _testFoodDispenser.Restock();
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[0].Count);
+            _testFoodDispenser.Dispense("Soda");
+            Assert.AreEqual(4, _testFoodDispenser.Inventory[0].Count);
         }
 
         [TestMethod]
         public void TestOtherItemsAreNotRemovedFromInventoryWhenDispensed()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
-            testFoodDispenser.Restock();
-            Assert.AreEqual(5, testFoodDispenser.Inventory[0].Count);
-            testFoodDispenser.Dispense("Soda");
-            Assert.AreEqual(4, testFoodDispenser.Inventory[0].Count);
-            Assert.AreEqual(5, testFoodDispenser.Inventory[1].Count);
-            Assert.AreEqual(5, testFoodDispenser.Inventory[2].Count);
+            _testFoodDispenser.Restock();
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[0].Count);
+            _testFoodDispenser.Dispense("Soda");
+            Assert.AreEqual(4, _testFoodDispenser.Inventory[0].Count);
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[1].Count);
+            Assert.AreEqual(5, _testFoodDispenser.Inventory[2].Count);
         }
 
         [TestMethod]
         public void TestFoodDispenserCanDispenseSoda()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Soda";
-            testFoodDispenser.Restock();
-            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            _testFoodDispenser.Restock();
+            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Soda", dispensedItem);
         }
 
         [TestMethod]
         public void TestFoodDispenserCanDispenseChips()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Chips";
-            testFoodDispenser.Restock();
-            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            _testFoodDispenser.Restock();
+            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Chips", dispensedItem);
         }
 
         [TestMethod]
         public void TestFoodDispenserCanDispenseCandy()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
             string itemToDispense = "Candy";
-            testFoodDispenser.Restock();
-            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            _testFoodDispenser.Restock();
+            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.AreEqual("Candy", dispensedItem);
         }
 
         [TestMethod]
         public void TestFoodDispenserReturnsNullWhenItHasNoItemToDispense()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
-            Assert.AreEqual(0,testFoodDispenser.Inventory.Count);
+            Assert.AreEqual(0,_testFoodDispenser.Inventory.Count);
             string itemToDispense = "Candy";
-            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.IsNull(dispensedItem);
         }
 
         [TestMethod]
         public void TestFoodDispenserReturnsNullWhenPassedAnItemItWillNeverHaveInStock()
         {
-            VmFoodDispenser testFoodDispenser = new VmFoodDispenser();
-            testFoodDispenser.Restock();
-            Assert.AreEqual(3, testFoodDispenser.Inventory.Count);
+            _testFoodDispenser.Restock();
+            Assert.AreEqual(3, _testFoodDispenser.Inventory.Count);
             string itemToDispense = "Steak";
-            string dispensedItem = testFoodDispenser.Dispense(itemToDispense);
+            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.IsNull(dispensedItem);
         }
     }

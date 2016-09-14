@@ -7,7 +7,13 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinValidatorTest
     {
-        private readonly VmCoinValidator _testValidator = new VmCoinValidator();
+        VmCoinValidator _testValidator;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _testValidator = new VmCoinValidator();
+        }
 
         [TestMethod]
         public void TestCoinValidatorReturnsFalseWhenInvalidCoinIsPassedIn()

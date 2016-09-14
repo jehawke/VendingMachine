@@ -7,7 +7,13 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinReturnTest
     {
-        private readonly VmCoinReturn _coinReturn = new VmCoinReturn();
+        VmCoinReturn _coinReturn;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _coinReturn = new VmCoinReturn();
+        }
 
         [TestMethod]
         public void WhenCoinReturnIsPassedACoinItIsAddedToListOfCoinsInReturn()
