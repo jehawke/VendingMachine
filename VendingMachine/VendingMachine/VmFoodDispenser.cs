@@ -18,7 +18,7 @@ namespace VendingMachine
         private readonly List<string> _chips = new List<string>();
         private readonly List<string> _candy = new List<string>();
 
-        public readonly List<List<string>> Inventory = new List<List<string>>();
+        private readonly List<List<string>> _inventory = new List<List<string>>();
 
         
         public string Dispense(string itemToDispense)
@@ -53,9 +53,14 @@ namespace VendingMachine
                 _candy.Add(CANDY_STRING);
             }
             
-            Inventory.Add(_soda);
-            Inventory.Add(_chips);
-            Inventory.Add(_candy);
+            _inventory.Add(_soda);
+            _inventory.Add(_chips);
+            _inventory.Add(_candy);
+        }
+
+        public List<List<string>> GetInventory()
+        {
+            return _inventory;
         }
     }
 }

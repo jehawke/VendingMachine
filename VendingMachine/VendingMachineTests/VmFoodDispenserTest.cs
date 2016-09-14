@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using VendingMachine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,43 +8,38 @@ namespace VendingMachineTests
     [TestClass]
     public class VmFoodDispenserTest
     {
-        VmFoodDispenser _testFoodDispenser;
+        private VmFoodDispenser _testFoodDispenser;
+        private List<List<string>> _inventoryToTest;
 
         [TestInitialize]
         public void Initialize()
         {
             _testFoodDispenser = new VmFoodDispenser();
+            _inventoryToTest = new List<List<string>>();
         }
 
         [TestMethod]
         public void TestItemsAreAddedToInventoryWhenRestockIsCalled()
         {
-            Assert.AreEqual(0,_testFoodDispenser.Inventory.Count);
+            Assert.AreEqual(0, _inventoryToTest.Count);
             _testFoodDispenser.Restock();
-            Assert.AreEqual(3,_testFoodDispenser.Inventory.Count);
-            Assert.AreEqual(5,_testFoodDispenser.Inventory[0].Count);
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[1].Count);
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[2].Count);
+            _inventoryToTest = _testFoodDispenser.GetInventory();
+            Assert.AreEqual(3,_inventoryToTest.Count);
+            Assert.AreEqual(5, _inventoryToTest[0].Count);
+            Assert.AreEqual(5, _inventoryToTest[1].Count);
+            Assert.AreEqual(5, _inventoryToTest[2].Count);
         }
 
         [TestMethod]
-        public void TestItemsAreRemovedFromInventoryWhenDispensed()
+        public void TestItemsAreProperlyRemovedFromInventoryWhenDispensed()
         {
             _testFoodDispenser.Restock();
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[0].Count);
+            _inventoryToTest = _testFoodDispenser.GetInventory();
+            Assert.AreEqual(5, _inventoryToTest[0].Count);
             _testFoodDispenser.Dispense("Soda");
-            Assert.AreEqual(4, _testFoodDispenser.Inventory[0].Count);
-        }
-
-        [TestMethod]
-        public void TestOtherItemsAreNotRemovedFromInventoryWhenDispensed()
-        {
-            _testFoodDispenser.Restock();
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[0].Count);
-            _testFoodDispenser.Dispense("Soda");
-            Assert.AreEqual(4, _testFoodDispenser.Inventory[0].Count);
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[1].Count);
-            Assert.AreEqual(5, _testFoodDispenser.Inventory[2].Count);
+            Assert.AreEqual(4, _inventoryToTest[0].Count);
+            Assert.AreEqual(5, _inventoryToTest[1].Count);
+            Assert.AreEqual(5, _inventoryToTest[2].Count);
         }
 
         [TestMethod]
@@ -76,7 +72,8 @@ namespace VendingMachineTests
         [TestMethod]
         public void TestFoodDispenserReturnsNullWhenItHasNoItemToDispense()
         {
-            Assert.AreEqual(0,_testFoodDispenser.Inventory.Count);
+            _inventoryToTest = _testFoodDispenser.GetInventory();
+            Assert.AreEqual(0,_inventoryToTest.Count);
             string itemToDispense = "Candy";
             string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.IsNull(dispensedItem);
@@ -86,7 +83,8 @@ namespace VendingMachineTests
         public void TestFoodDispenserReturnsNullWhenPassedAnItemItWillNeverHaveInStock()
         {
             _testFoodDispenser.Restock();
-            Assert.AreEqual(3, _testFoodDispenser.Inventory.Count);
+            _inventoryToTest = _testFoodDispenser.GetInventory();
+            Assert.AreEqual(3, _inventoryToTest.Count);
             string itemToDispense = "Steak";
             string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
             Assert.IsNull(dispensedItem);
