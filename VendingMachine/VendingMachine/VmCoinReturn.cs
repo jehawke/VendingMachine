@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace VendingMachine
 {
     public class VmCoinReturn
     {
-        public List<string> CoinsInReturn = new List<string>();
+        private readonly List<string> _coinsInReturn = new List<string>();
 
         public void ReceiveCoin(string rejectedCoin)
         {
-            CoinsInReturn.Add(rejectedCoin);
+            _coinsInReturn.Add(rejectedCoin);
         }
 
         public void RemoveCoinsInReturn()
         {
-            CoinsInReturn.Clear();
+            _coinsInReturn.Clear();
+        }
+
+        public List<string> CheckReturn()
+        {
+            return _coinsInReturn;
         }
     }
 }

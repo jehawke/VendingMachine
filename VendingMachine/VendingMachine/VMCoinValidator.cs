@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace VendingMachine
 {
     public class VmCoinValidator
@@ -16,25 +11,30 @@ namespace VendingMachine
         private const int DIME_VALUE = 10;
         private const int NICKEL_VALUE = 5;
 
-        public int CurrentTransactionTotal = 0;
+        private int _currentTransactionTotal = 0;
 
         public bool ValidateCoin(string coinToValidate)
         {
             switch (coinToValidate)
             {
                 case (QUARTER_STRING):
-                    CurrentTransactionTotal += QUARTER_VALUE;
+                    _currentTransactionTotal += QUARTER_VALUE;
                     return true;
                 case (DIME_STRING):
-                    CurrentTransactionTotal += DIME_VALUE;
+                    _currentTransactionTotal += DIME_VALUE;
                     return true;
                 case (NICKEL_STRING):
-                    CurrentTransactionTotal += NICKEL_VALUE;
+                    _currentTransactionTotal += NICKEL_VALUE;
                     return true;
 
                 default:
                     return false;                    
             }            
+        }
+
+        public int GetCurrentTransactionTotal()
+        {
+            return _currentTransactionTotal;
         }
     }
 }

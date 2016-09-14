@@ -1,5 +1,4 @@
-﻿using System;
-using VendingMachine;
+﻿using VendingMachine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VendingMachineTests

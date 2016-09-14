@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using VendingMachine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,21 +7,23 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinReturnTest
     {
-        VmCoinReturn _coinReturn;
+        private VmCoinReturn _coinReturn;
+        private List<string> _coinsInReturn;
 
         [TestInitialize]
         public void Initialize()
         {
             _coinReturn = new VmCoinReturn();
+            _coinsInReturn = _coinReturn.CheckReturn();
         }
 
         [TestMethod]
         public void WhenCoinReturnIsPassedACoinItIsAddedToListOfCoinsInReturn()
         {
-            Assert.AreEqual(0, _coinReturn.CoinsInReturn.Count);
+            Assert.AreEqual(0, _coinsInReturn.Count);
             string rejectedCoinToTest = "Coin";
             _coinReturn.ReceiveCoin(rejectedCoinToTest);
-            Assert.AreEqual(1,_coinReturn.CoinsInReturn.Count);
+            Assert.AreEqual(1, _coinsInReturn.Count);
         }
 
         [TestMethod]
@@ -29,9 +31,9 @@ namespace VendingMachineTests
         {
             string rejectedCoinToTest = "Coin";
             _coinReturn.ReceiveCoin(rejectedCoinToTest);
-            Assert.AreEqual(1, _coinReturn.CoinsInReturn.Count);
+            Assert.AreEqual(1, _coinsInReturn.Count);
             _coinReturn.RemoveCoinsInReturn();
-            Assert.AreEqual(0, _coinReturn.CoinsInReturn.Count);
+            Assert.AreEqual(0, _coinsInReturn.Count);
         }
     }
 }

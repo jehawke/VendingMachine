@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachine;
 
 namespace VendingMachineTests
@@ -16,47 +15,58 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
+        public void TestGetCurrentTransactionTotalReturnsTransactionTotal()
+        {
+            Assert.IsNotNull(_testValidator.GetCurrentTransactionTotal());
+        }
+
+        [TestMethod]
         public void TestCoinValidatorReturnsFalseWhenInvalidCoinIsPassedIn()
         {           
             Assert.IsFalse(_testValidator.ValidateCoin("Penny"));
-            Assert.AreEqual(0, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(0);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesQuarter()
         {
             Assert.IsTrue(_testValidator.ValidateCoin("Quarter"));
-            Assert.AreEqual(25, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(25);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesDime()
         {
             Assert.IsTrue(_testValidator.ValidateCoin("Dime"));
-            Assert.AreEqual(10, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(10);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesNickel()
         {
             Assert.IsTrue(_testValidator.ValidateCoin("Nickel"));
-            Assert.AreEqual(5, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(5);
         }
 
         [TestMethod]
         public void TestCoinValidatorCanHandleMultpleCoinsPerTransaction()
         {
             _testValidator.ValidateCoin("Quarter");
-            Assert.AreEqual(25, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(25);
 
             _testValidator.ValidateCoin("Dime");
-            Assert.AreEqual(35, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(35);
 
             _testValidator.ValidateCoin("Penny");
-            Assert.AreEqual(35, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(35);
 
             _testValidator.ValidateCoin("Nickel");
-            Assert.AreEqual(40, _testValidator.CurrentTransactionTotal);
+            CheckTransactionTotal(40);
+        }
+
+        private void CheckTransactionTotal(int expectedTotal)
+        {
+            Assert.AreEqual(expectedTotal,_testValidator.GetCurrentTransactionTotal());
         }
 
     }
