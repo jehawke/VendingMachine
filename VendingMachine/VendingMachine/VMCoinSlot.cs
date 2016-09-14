@@ -6,9 +6,9 @@ namespace VendingMachine
     {
         private readonly VmCoinValidator _validator = new VmCoinValidator();
 
-        public void ReceiveCoinAndSendToValidator()
+        public bool ReceiveCoinAndSendToValidator(string coinToSend)
         {
-  
+            return _validator.ValidateCoin(coinToSend);
         }
 
     }

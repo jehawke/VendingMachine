@@ -6,16 +6,23 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinSlotTest
     {
-        private string _coinToSend;
+        private VmCoinSlot _coinSlot;
+        
+        [TestInitialize]
+        public void Initialize()
+        {
+            _coinSlot = new VmCoinSlot();
+        }
+
+
 
         [TestMethod]
         public void TestCoinSlotSendsCoinsToValidator()
         {
-            _coinToSend = "Quarter";
-            VmCoinSlot coinSlot = new VmCoinSlot();
-
-
+            string coinToSend = "Quarter";
+            Assert.IsTrue(_coinSlot.ReceiveCoinAndSendToValidator(coinToSend));
         }
+
 
     }
 }

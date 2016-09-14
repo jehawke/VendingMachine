@@ -18,6 +18,16 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
+        public void TestCheckReturnReturnsListOfCoinsInReturn()
+        {
+            string coinToTest = "Quarter";
+            Assert.AreEqual(0,_coinsInReturn.Count);
+            _coinReturn.ReceiveCoin(coinToTest);
+            Assert.AreEqual(1, _coinsInReturn.Count);
+            Assert.AreEqual(coinToTest, _coinsInReturn[0]);
+        }
+
+        [TestMethod]
         public void WhenCoinReturnIsPassedACoinItIsAddedToListOfCoinsInReturn()
         {
             Assert.AreEqual(0, _coinsInReturn.Count);

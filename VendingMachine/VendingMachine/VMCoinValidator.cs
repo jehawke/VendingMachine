@@ -11,7 +11,7 @@ namespace VendingMachine
         private const int DIME_VALUE = 10;
         private const int NICKEL_VALUE = 5;
 
-        private int _currentTransactionTotal = 0;
+        private int _currentTransactionTotal;
 
         public bool ValidateCoin(string coinToValidate)
         {
