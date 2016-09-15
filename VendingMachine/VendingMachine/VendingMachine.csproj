@@ -49,6 +49,7 @@
     <Compile Include="VmCoinSlot.cs" />
     <Compile Include="VmCoinValidator.cs" />
     <Compile Include="VmFoodDispenser.cs" />
+    <Compile Include="VmFoodSlot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
