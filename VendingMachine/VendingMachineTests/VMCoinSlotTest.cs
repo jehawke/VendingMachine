@@ -26,9 +26,9 @@ namespace VendingMachineTests
         public void TestWhenCoinIsInvalidCoinIsSentToCoinReturn()
         {
             string coinToSend = "Penny";
-            Assert.IsFalse(_coinSlot.GetSendCoinToReturnWasCalled());
+            Assert.AreEqual(0, _coinSlot.GetTimesSendCoinToReturnWasCalled());
             Assert.IsFalse(_coinSlot.ReceiveCoinAndSendToValidator(coinToSend));
-            Assert.IsTrue(_coinSlot.GetSendCoinToReturnWasCalled());
+            Assert.AreEqual(1, _coinSlot.GetTimesSendCoinToReturnWasCalled());
         }
 
         [TestMethod]
@@ -47,6 +47,24 @@ namespace VendingMachineTests
             Assert.AreEqual(2, _coinSlot.GetCoinsInCurrentTransaction().Count);
             Assert.AreEqual("Q",_coinSlot.GetCoinsInCurrentTransaction()[0]);
             Assert.AreEqual("D", _coinSlot.GetCoinsInCurrentTransaction()[1]);
+        }
+
+        [TestMethod]
+        public void TestCoinSlotCanGiveRefundsToCoinReturn()
+        {
+            string firstCoinToSend = "Q";
+            string secondCoinToSend = "D";
+
+            _coinSlot.ReceiveCoinAndSendToValidator(firstCoinToSend);
+            _coinSlot.ReceiveCoinAndSendToValidator(secondCoinToSend);
+
+            Assert.AreEqual(2,_coinSlot.GetCoinsInCurrentTransaction().Count);
+
+            _coinSlot.GiveRefund();
+
+            Assert.AreEqual(0,_coinSlot.GetCoinsInCurrentTransaction().Count);
+            Assert.AreEqual(2, _coinSlot.GetTimesSendCoinToReturnWasCalled());
+
         }
     }
 }
