@@ -4,9 +4,13 @@ namespace VendingMachine
 {
     public class VmFoodDispenser
     {
-        private const string SODA_STRING = "Soda";
-        private const string CHIPS_STRING = "Chips";
-        private const string CANDY_STRING  = "Candy";
+        private const string SODA_STRING = "S";
+        private const string CHIPS_STRING = "H";
+        private const string CANDY_STRING  = "C";
+
+        private const int SODA_COST = 100;
+        private const int CHIPS_COST = 50;
+        private const int CANDY_COST = 65;
 
         private const int NUM_ITEMS_ADDED_IN_RESTOCK = 5;
 
@@ -16,32 +20,31 @@ namespace VendingMachine
 
         private readonly List<List<string>> _inventory = new List<List<string>>();
 
-        public VmFoodSlot FoodSlot = new VmFoodSlot();
-
-        public bool Dispense(string itemToDispense)
+        public bool Dispense(string itemToDispense,VmCoinValidator validator, VmCoinBank coinBank, VmFoodSlot foodSlot)
         {
-            if (itemToDispense == SODA_STRING && _soda.Count > 0)
+            int currentTransactionTotal = validator.GetCurrentTransactionTotal();
+            if (itemToDispense == SODA_STRING && _soda.Count > 0 && currentTransactionTotal >= SODA_COST)
             {
                 _soda.Remove(SODA_STRING);
-                FoodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood(itemToDispense);
+                coinBank.GiveChange(currentTransactionTotal - SODA_COST);
                 return true;
             }
-            else if (itemToDispense == CHIPS_STRING && _chips.Count > 0)
+            if (itemToDispense == CHIPS_STRING && _chips.Count > 0 && currentTransactionTotal >= CHIPS_COST)
             {
                 _chips.Remove(CHIPS_STRING);
-                FoodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood(itemToDispense);
+                coinBank.GiveChange(currentTransactionTotal - CHIPS_COST);
                 return true;
             }
-            else if (itemToDispense == CANDY_STRING && _candy.Count > 0)
+            if (itemToDispense == CANDY_STRING && _candy.Count > 0 && currentTransactionTotal >= CANDY_COST)
             {
                 _candy.Remove(CANDY_STRING);
-                FoodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood(itemToDispense);
+                coinBank.GiveChange(currentTransactionTotal - CANDY_COST);
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public void Restock()

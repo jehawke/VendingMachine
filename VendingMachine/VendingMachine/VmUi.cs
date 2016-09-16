@@ -15,16 +15,18 @@ namespace VendingMachine
         private readonly VmCoinReturn _coinReturn;
         private readonly VmFoodDispenser _foodDispenser;
         private readonly VmFoodSlot _foodSlot;
+        private readonly VmCoinBank _coinBank;
         private readonly IConsole _console;
         private string _entry;
 
-        public VmUi(VmCoinSlot coinSlot, VmCoinValidator coinValidator, VmCoinReturn coinReturn, VmFoodDispenser foodDispenser, VmFoodSlot foodSlot, IConsole console)
+        public VmUi(VmCoinSlot coinSlot, VmCoinValidator coinValidator, VmCoinReturn coinReturn, VmFoodDispenser foodDispenser, VmFoodSlot foodSlot, VmCoinBank coinBank, IConsole console)
         {
             _coinSlot = coinSlot;
             _coinValidator = coinValidator;
             _coinReturn = coinReturn;
             _foodDispenser = foodDispenser;
             _foodSlot = foodSlot;
+            _coinBank = coinBank;
             _console = console;
             
             _showMainUiWasCalled = false;
@@ -65,7 +67,16 @@ namespace VendingMachine
                 case ("S"):
                 case ("H"):
                 case ("C"):
-                    _foodDispenser.Dispense(_entry);
+                    if (_foodDispenser.Dispense(_entry, _coinValidator, _coinBank, _foodSlot))
+                    {
+                        Console.WriteLine("You hear a *thunk* as an item lands in the Food Slot.");
+                        ShowFoodSlotUi();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nothing happens.");
+                        ShowDisplayUi();
+                    }
                     break;
                 case ("T"):
                     ShowFoodSlotUi();

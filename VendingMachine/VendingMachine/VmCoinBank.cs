@@ -32,6 +32,11 @@ namespace VendingMachine
             }
         }
 
+        public void DetermineChange()
+        {
+            _validator.GetCurrentTransactionTotal();
+        }
+
         public List<string> GiveChange(int changeNeeded)
         {
             bool bOutOfChange = false;
