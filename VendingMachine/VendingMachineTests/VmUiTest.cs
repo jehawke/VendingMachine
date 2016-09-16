@@ -15,7 +15,7 @@ namespace VendingMachineTests
             VmCoinValidator validator = new VmCoinValidator();
             VmCoinReturn coinReturn = new VmCoinReturn();
             IConsole mockConsole = new MockGetInput();
-            _testUi = new VmUi(new VmCoinSlot(new List<string>(), coinReturn, validator), validator, coinReturn, new VmFoodDispenser(), new VmFoodSlot(), mockConsole);
+            _testUi = new VmUi(new VmCoinSlot(new List<string>(), coinReturn, validator), validator, coinReturn, new VmFoodDispenser(), new VmFoodSlot(), new VmCoinBank(new List<string>(), validator),  mockConsole);
         }
 
         [TestMethod]
