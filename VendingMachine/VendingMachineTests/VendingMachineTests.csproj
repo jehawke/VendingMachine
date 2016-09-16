@@ -59,6 +59,7 @@
     <Compile Include="VmDisplayTest.cs" />
     <Compile Include="VmFoodDispenserTest.cs" />
     <Compile Include="VmFoodSlotTest.cs" />
+    <Compile Include="VmUiTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine\VendingMachine.csproj">
