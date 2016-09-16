@@ -14,13 +14,17 @@ namespace VendingMachine
 
         private void SetDisplay()
         {
-            /*           if (_validator.GetCurrentTransactionTotal() > 0)
-                       {
-                           stringToDisplay = _validator.GetCurrentTransactionTotal().ToString();
-                       }*/
-
-            _displayString = "INSERT COIN";
+            if (_validator.GetCurrentTransactionTotal() > 0)
+            {
+                _displayString = _validator.GetCurrentTransactionTotal().ToString();
+                _displayString = _displayString.Insert(_displayString.Length -2, ".");
+            }
+            else
+            {
+                _displayString = "INSERT COIN";
+            }
         }
+
 
         public string CheckDisplay()
         {

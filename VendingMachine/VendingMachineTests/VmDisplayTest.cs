@@ -18,13 +18,13 @@ namespace VendingMachineTests
         [TestInitialize]
         public void Initialize()
         {
-            _testDisplay = new VmDisplay(_validator);
             _foodDispenser = new VmFoodDispenser();
             _coinReturn = new VmCoinReturn();
             _validator = new VmCoinValidator();
             _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
             _foodSlot = new VmFoodSlot();
             _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
+            _testDisplay = new VmDisplay(_validator);
         }
 
 
@@ -34,5 +34,11 @@ namespace VendingMachineTests
            Assert.AreEqual("INSERT COIN" , _testDisplay.CheckDisplay());
         }
 
+        [TestMethod]
+        public void TestDisplayShowsCurrentTransactionTotal()
+        {
+            _validator.ValidateCoin("Q");
+            Assert.AreEqual(".25", _testDisplay.CheckDisplay());
+        }
     }
 }
