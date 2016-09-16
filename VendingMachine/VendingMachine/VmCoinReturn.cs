@@ -7,10 +7,10 @@ namespace VendingMachine
     {
         private readonly List<string> _coinsInReturn = new List<string>();
 
-        public void ReceiveCoin(string rejectedCoin)
+        public void ReceiveCoin(List<string> rejectedCoin)
         {
-            Console.WriteLine("You hear a *clink* as a coin falls into the coin return.");
-            _coinsInReturn.Add(rejectedCoin);
+            Console.WriteLine("You hear a *clink* as something falls into the coin return.");
+            rejectedCoin.ForEach(_coinsInReturn.Add);
         }
 
         public void RemoveCoinsInReturn()

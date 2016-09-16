@@ -9,11 +9,15 @@ namespace VendingMachine
         private const int NUM_COINS_TO_RESTOCK = 5;
         private readonly List<string> _coinsInBank;
         private readonly VmCoinValidator _validator;
+        private readonly VmCoinSlot _coinSlot;
+        private readonly VmCoinReturn _coinReturn;
 
-        public VmCoinBank(List<string> coinsInBank, VmCoinValidator validator)
+        public VmCoinBank(List<string> coinsInBank, VmCoinValidator validator, VmCoinSlot coinSlot, VmCoinReturn coinReturn)
         {
             _coinsInBank = coinsInBank;
             _validator = validator;
+            _coinSlot = coinSlot;
+            _coinReturn = coinReturn;
 
         }
 
@@ -37,10 +41,11 @@ namespace VendingMachine
             _validator.GetCurrentTransactionTotal();
         }
 
-        public List<string> GiveChange(int changeNeeded)
+        public void MakeChange(int changeNeeded)
         {
             bool bOutOfChange = false;
             List<string> changeToGive = new List<string>();
+            AcceptMoney(_coinSlot.GetCoinsInCurrentTransaction());
 
             while (changeNeeded > 0 && bOutOfChange == false)
             {
@@ -67,12 +72,13 @@ namespace VendingMachine
                     bOutOfChange = true;
                 }
             }
-            return changeToGive;
+            _coinReturn.ReceiveCoin(changeToGive);
         }
 
         public void AcceptMoney(List<string> coinsToBank)
         {
             coinsToBank.ForEach(_coinsInBank.Add);
+            coinsToBank.Clear();
         }
     }
 }

@@ -9,14 +9,26 @@ namespace VendingMachineTests
     {
         VmUi _testUi;
 
+        private VmFoodDispenser _foodDispenser;
+        private VmCoinReturn _coinReturn;
+        private VmCoinValidator _validator;
+        private VmFoodSlot _foodSlot;
+        private VmCoinSlot _coinSlot;
+        private VmCoinBank _coinBank;
+
         [TestInitialize]
         public void Initialize()
         {
-            VmCoinValidator validator = new VmCoinValidator();
-            VmCoinReturn coinReturn = new VmCoinReturn();
+            _foodDispenser = new VmFoodDispenser();
+            _coinReturn = new VmCoinReturn();
+            _validator = new VmCoinValidator();
+            _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
+            _foodSlot = new VmFoodSlot();
+            _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
             IConsole mockConsole = new MockGetInput();
-            _testUi = new VmUi(new VmCoinSlot(new List<string>(), coinReturn, validator), validator, coinReturn, new VmFoodDispenser(), new VmFoodSlot(), new VmCoinBank(new List<string>(), validator),  mockConsole);
+            _testUi = new VmUi(_coinSlot, _validator, _coinReturn, _foodDispenser, _foodSlot, _coinBank, mockConsole);
         }
+
 
         [TestMethod]
         public void TestMainUiIsCalled()

@@ -7,7 +7,21 @@ namespace VendingMachineTests
     [TestClass]
     public class VmCoinBankTest
     {
-        readonly VmCoinBank _coinBank = new VmCoinBank(new List<string>(), new VmCoinValidator());
+
+        private VmCoinReturn _coinReturn;
+        private VmCoinValidator _validator;
+        private VmCoinSlot _coinSlot;
+        private VmCoinBank _coinBank;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _coinReturn = new VmCoinReturn();
+            _validator = new VmCoinValidator();
+            _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
+            _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
+        }
+        
         
         [TestMethod]
         public void TestCoinBankCanAddCoins()
@@ -21,8 +35,9 @@ namespace VendingMachineTests
         public void TestCoinBankCanGiveCoins()
         {
             _coinBank.Restock();
-            List<string> testChange = _coinBank.GiveChange(40);
-            
+            _coinBank.MakeChange(40);
+            List<string> testChange = _coinReturn.CheckReturn();
+
             Assert.AreEqual("Q", testChange[0]);
             Assert.AreEqual("D", testChange[1]);
             Assert.AreEqual("N", testChange[2]);

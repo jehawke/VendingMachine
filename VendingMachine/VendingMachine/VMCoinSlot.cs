@@ -22,17 +22,15 @@ namespace VendingMachine
             if (_validator.ValidateCoin(coinToSend))
             {
                 _listOfCoinsInCurrentTransaction.Add(coinToSend);
+                return true;
             }
-            else
-            {
                 SendCoinToReturn(coinToSend);
-            }
-            return _validator.ValidateCoin(coinToSend);
+                return false;
         }
 
         private void SendCoinToReturn(string coinToSend)
         {
-            _coinReturn.ReceiveCoin(coinToSend);
+            _coinReturn.ReceiveCoin(new List<string> {coinToSend});
             _timesSendCoinToReturnWasCalled ++;
         }
 

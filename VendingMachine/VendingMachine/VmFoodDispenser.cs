@@ -27,21 +27,21 @@ namespace VendingMachine
             {
                 _soda.Remove(SODA_STRING);
                 foodSlot.AcceptFood(itemToDispense);
-                coinBank.GiveChange(currentTransactionTotal - SODA_COST);
+                coinBank.MakeChange(currentTransactionTotal - SODA_COST);
                 return true;
             }
             if (itemToDispense == CHIPS_STRING && _chips.Count > 0 && currentTransactionTotal >= CHIPS_COST)
             {
                 _chips.Remove(CHIPS_STRING);
                 foodSlot.AcceptFood(itemToDispense);
-                coinBank.GiveChange(currentTransactionTotal - CHIPS_COST);
+                coinBank.MakeChange(currentTransactionTotal - CHIPS_COST);
                 return true;
             }
             if (itemToDispense == CANDY_STRING && _candy.Count > 0 && currentTransactionTotal >= CANDY_COST)
             {
                 _candy.Remove(CANDY_STRING);
                 foodSlot.AcceptFood(itemToDispense);
-                coinBank.GiveChange(currentTransactionTotal - CANDY_COST);
+                coinBank.MakeChange(currentTransactionTotal - CANDY_COST);
                 return true;
             }
             return false;

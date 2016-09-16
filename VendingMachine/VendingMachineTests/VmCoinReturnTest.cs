@@ -20,11 +20,12 @@ namespace VendingMachineTests
         [TestMethod]
         public void TestCheckReturnReturnsListOfCoinsInReturn()
         {
-            string coinToTest = "Quarter";
+            string expectedCoin = "Q";
+            List<string> listOfCoinToTest = new List<string> { expectedCoin };
             Assert.AreEqual(0,_coinsInReturn.Count);
-            _coinReturn.ReceiveCoin(coinToTest);
+            _coinReturn.ReceiveCoin(listOfCoinToTest);
             Assert.AreEqual(1, _coinsInReturn.Count);
-            Assert.AreEqual(coinToTest, _coinsInReturn[0]);
+            Assert.AreEqual(expectedCoin, _coinsInReturn[0]);
         }
 
         [TestMethod]
@@ -32,7 +33,7 @@ namespace VendingMachineTests
         {
             Assert.AreEqual(0, _coinsInReturn.Count);
             string rejectedCoinToTest = "Coin";
-            _coinReturn.ReceiveCoin(rejectedCoinToTest);
+            _coinReturn.ReceiveCoin(new List<string> {rejectedCoinToTest});
             Assert.AreEqual(1, _coinsInReturn.Count);
         }
 
@@ -40,7 +41,7 @@ namespace VendingMachineTests
         public void WhenCustomerTakesCoinsTheyAreRemovedFromList()
         {
             string rejectedCoinToTest = "Coin";
-            _coinReturn.ReceiveCoin(rejectedCoinToTest);
+            _coinReturn.ReceiveCoin(new List<string> {rejectedCoinToTest});
             Assert.AreEqual(1, _coinsInReturn.Count);
             _coinReturn.RemoveCoinsInReturn();
             Assert.AreEqual(0, _coinsInReturn.Count);
