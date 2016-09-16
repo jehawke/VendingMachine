@@ -64,6 +64,23 @@ namespace VendingMachineTests
             CheckTransactionTotal(40);
         }
 
+        [TestMethod]
+        public void TestGetQuarterGivesQuarter()
+        {
+            Assert.AreEqual("Q", _testValidator.GetQuarterDefinition());
+        }
+        [TestMethod]
+        public void TestGetDimeGivesDime()
+        {
+            Assert.AreEqual("D", _testValidator.GetDimeDefinition());
+        }
+
+        [TestMethod]
+        public void TestGetNickelGivesNickel()
+        {
+            Assert.AreEqual("N", _testValidator.GetNickelDefinition());
+        }
+
         private void CheckTransactionTotal(int expectedTotal)
         {
             Assert.AreEqual(expectedTotal,_testValidator.GetCurrentTransactionTotal());

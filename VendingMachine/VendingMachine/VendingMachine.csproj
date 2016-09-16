@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockGetInput.cs" />
+    <Compile Include="VmCoinBank.cs" />
     <Compile Include="VmGetInput.cs" />
     <Compile Include="IConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -36,5 +36,18 @@ namespace VendingMachine
         {
             return _currentTransactionTotal;
         }
+
+        public string GetQuarterDefinition()
+        {
+            return QUARTER_STRING;
+        }
+        public string GetNickelDefinition()
+        {
+            return NICKEL_STRING;
+        }
+        public string GetDimeDefinition()
+        {
+            return DIME_STRING;
+        }
     }
 }
