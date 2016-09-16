@@ -44,49 +44,39 @@ namespace VendingMachineTests
         [TestMethod]
         public void TestFoodDispenserCanDispenseSoda()
         {
-            string itemToDispense = "Soda";
             _testFoodDispenser.Restock();
-            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
-            Assert.AreEqual("Soda", dispensedItem);
+            Assert.IsTrue(_testFoodDispenser.Dispense("Soda"));
         }
 
         [TestMethod]
         public void TestFoodDispenserCanDispenseChips()
         {
-            string itemToDispense = "Chips";
             _testFoodDispenser.Restock();
-            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
-            Assert.AreEqual("Chips", dispensedItem);
+            Assert.IsTrue(_testFoodDispenser.Dispense("Chips"));
         }
 
         [TestMethod]
         public void TestFoodDispenserCanDispenseCandy()
         {
-            string itemToDispense = "Candy";
             _testFoodDispenser.Restock();
-            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
-            Assert.AreEqual("Candy", dispensedItem);
+            Assert.IsTrue(_testFoodDispenser.Dispense("Candy"));
         }
 
         [TestMethod]
-        public void TestFoodDispenserReturnsNullWhenItHasNoItemToDispense()
+        public void TestFoodDispenserReturnsFalseWhenItHasNoItemToDispense()
         {
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(0,_inventoryToTest.Count);
-            string itemToDispense = "Candy";
-            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
-            Assert.IsNull(dispensedItem);
+            Assert.IsFalse(_testFoodDispenser.Dispense("Candy"));
         }
 
         [TestMethod]
-        public void TestFoodDispenserReturnsNullWhenPassedAnItemItWillNeverHaveInStock()
+        public void TestFoodDispenserReturnsFalseWhenPassedAnItemItWillNeverHaveInStock()
         {
             _testFoodDispenser.Restock();
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(3, _inventoryToTest.Count);
-            string itemToDispense = "Steak";
-            string dispensedItem = _testFoodDispenser.Dispense(itemToDispense);
-            Assert.IsNull(dispensedItem);
+            Assert.IsFalse(_testFoodDispenser.Dispense("Steak"));
         }
     }
 }

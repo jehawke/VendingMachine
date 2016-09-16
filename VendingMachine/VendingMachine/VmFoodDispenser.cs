@@ -16,27 +16,31 @@ namespace VendingMachine
 
         private readonly List<List<string>> _inventory = new List<List<string>>();
 
-        
-        public string Dispense(string itemToDispense)
+        public VmFoodSlot FoodSlot = new VmFoodSlot();
+
+        public bool Dispense(string itemToDispense)
         {
             if (itemToDispense == SODA_STRING && _soda.Count > 0)
             {
                 _soda.Remove(SODA_STRING);
-                return itemToDispense;
+                FoodSlot.AcceptFood(itemToDispense);
+                return true;
             }
             else if (itemToDispense == CHIPS_STRING && _chips.Count > 0)
             {
                 _chips.Remove(CHIPS_STRING);
-                return itemToDispense;
+                FoodSlot.AcceptFood(itemToDispense);
+                return true;
             }
             else if (itemToDispense == CANDY_STRING && _candy.Count > 0)
             {
                 _candy.Remove(CANDY_STRING);
-                return itemToDispense;
+                FoodSlot.AcceptFood(itemToDispense);
+                return true;
             }
             else
             {
-                return null;
+                return false;
             }
         }
 
