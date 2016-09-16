@@ -68,6 +68,7 @@ namespace VendingMachine
                 Console.WriteLine("It's empty.");
                 Console.WriteLine("Press any key to return to the machine...");
                 Console.ReadLine();
+                ShowMainUi();
             }
             else
             {
@@ -90,6 +91,7 @@ namespace VendingMachine
                 Console.WriteLine("It's empty.");
                 Console.WriteLine("Press any key to return to the machine...");
                 Console.ReadLine();
+                ShowMainUi();
             }
             else
             {

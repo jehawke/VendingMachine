@@ -31,13 +31,37 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
+        public void TestCoinReturnCallsMainUiIfEmpty()
+        {
+            VmUi testUi = new VmUi();
+            Assert.IsFalse(testUi.GetMainUiWasShown());
+
+            testUi.ShowCoinReturnUi();
+
+            Assert.IsTrue(testUi.GetCoinReturnUiWasShown());
+            Assert.IsTrue(testUi.GetMainUiWasShown());
+        }
+
+        [TestMethod]
         public void TestFoodSlotUiIsCalled()
         {
             VmUi testUi = new VmUi();
             testUi.ShowFoodSlotUi();
             Assert.IsTrue(testUi.GetFoodSlotUiWasShown());
         }
-        
+
+        [TestMethod]
+        public void TestFoodSlotUiCallsMainUiIfEmpty()
+        {
+            VmUi testUi = new VmUi();
+            Assert.IsFalse(testUi.GetMainUiWasShown());
+
+            testUi.ShowFoodSlotUi();
+
+            Assert.IsTrue(testUi.GetFoodSlotUiWasShown());
+            Assert.IsTrue(testUi.GetMainUiWasShown());
+        }
+
         [TestMethod]
         public void TestDisplayUiIsCalled()
         {
