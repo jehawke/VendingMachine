@@ -30,37 +30,37 @@ namespace VendingMachineTests
         [TestMethod]
         public void TestCoinValidatorRecognizesQuarter()
         {
-            Assert.IsTrue(_testValidator.ValidateCoin("Quarter"));
+            Assert.IsTrue(_testValidator.ValidateCoin("Q"));
             CheckTransactionTotal(25);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesDime()
         {
-            Assert.IsTrue(_testValidator.ValidateCoin("Dime"));
+            Assert.IsTrue(_testValidator.ValidateCoin("D"));
             CheckTransactionTotal(10);
         }
 
         [TestMethod]
         public void TestCoinValidatorRecognizesNickel()
         {
-            Assert.IsTrue(_testValidator.ValidateCoin("Nickel"));
+            Assert.IsTrue(_testValidator.ValidateCoin("N"));
             CheckTransactionTotal(5);
         }
 
         [TestMethod]
         public void TestCoinValidatorCanHandleMultpleCoinsPerTransaction()
         {
-            _testValidator.ValidateCoin("Quarter");
+            _testValidator.ValidateCoin("Q");
             CheckTransactionTotal(25);
 
-            _testValidator.ValidateCoin("Dime");
+            _testValidator.ValidateCoin("D");
             CheckTransactionTotal(35);
 
             _testValidator.ValidateCoin("Penny");
             CheckTransactionTotal(35);
 
-            _testValidator.ValidateCoin("Nickel");
+            _testValidator.ValidateCoin("N");
             CheckTransactionTotal(40);
         }
 

@@ -17,7 +17,7 @@ namespace VendingMachineTests
         [TestMethod]
         public void TestCoinSlotSendsCoinsToValidator()
         {
-            string coinToSend = "Quarter";
+            string coinToSend = "Q";
             Assert.IsTrue(_coinSlot.ReceiveCoinAndSendToValidator(coinToSend));
         }
 

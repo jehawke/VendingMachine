@@ -3,9 +3,9 @@ namespace VendingMachine
 {
     public class VmCoinValidator
     {
-        private const string QUARTER_STRING = "Quarter" ;
-        private const string DIME_STRING = "Dime";
-        private const string NICKEL_STRING = "Nickel";
+        private const string QUARTER_STRING = "Q" ;
+        private const string DIME_STRING = "D";
+        private const string NICKEL_STRING = "N";
 
         private const int QUARTER_VALUE = 25;
         private const int DIME_VALUE = 10;
