@@ -35,12 +35,12 @@ namespace VendingMachine
             Console.WriteLine("|                                                          |");
             Console.WriteLine("| (S) Soda: 1.00       (H) Chips: .50       (C) Candy: .65 |");
             Console.WriteLine("|                                                          |");
-            Console.WriteLine("| (T) Take Item (0 items)        (N) Coin Return (0 items) |");
+            Console.WriteLine("| (T) Take Item (" + _foodSlot.GetListOfItemsInSlot().Count + " items)        (N) Coin Return (" + _coinReturn.CheckReturn().Count + " items) |");
             Console.WriteLine("____________________________________________________________");
             Console.WriteLine("");
-            Console.WriteLine("Type the letter of the item you wish to access");
+            Console.WriteLine("Enter the letter of the item you wish to access");
             Console.WriteLine("-OR-");
-            Console.WriteLine("Type 'D' at any time to check the display.");
+            Console.WriteLine("Enter 'D' at any time to check the display.");
 
             _showMainUiWasCalled = true;
         }
@@ -66,6 +66,8 @@ namespace VendingMachine
             if (_coinReturn.CheckReturn().Count == 0)
             {
                 Console.WriteLine("It's empty.");
+                Console.WriteLine("Press any key to return to the machine...");
+                Console.ReadLine();
             }
             else
             {
@@ -86,6 +88,8 @@ namespace VendingMachine
             if (_foodSlot.GetListOfItemsInSlot().Count == 0)
             {
                 Console.WriteLine("It's empty.");
+                Console.WriteLine("Press any key to return to the machine...");
+                Console.ReadLine();
             }
             else
             {

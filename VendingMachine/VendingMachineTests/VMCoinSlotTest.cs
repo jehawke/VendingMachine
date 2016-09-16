@@ -13,9 +13,7 @@ namespace VendingMachineTests
         {
             _coinSlot = new VmCoinSlot();
         }
-
-
-
+        
         [TestMethod]
         public void TestCoinSlotSendsCoinsToValidator()
         {
@@ -23,6 +21,13 @@ namespace VendingMachineTests
             Assert.IsTrue(_coinSlot.ReceiveCoinAndSendToValidator(coinToSend));
         }
 
-
+        [TestMethod]
+        public void TestWhenCoinIsInvalidCoinIsSentToCoinReturn()
+        {
+            string coinToSend = "Penny";
+            Assert.IsFalse(_coinSlot.GetSendCoinToReturnWasCalled());
+            Assert.IsFalse(_coinSlot.ReceiveCoinAndSendToValidator(coinToSend));
+            Assert.IsTrue(_coinSlot.GetSendCoinToReturnWasCalled());
+        }
     }
 }

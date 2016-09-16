@@ -10,7 +10,9 @@ namespace VendingMachine
     {
         static void Main(string[] args)
         {
-            
+            VmUi ui = new VmUi();
+            ui.ShowMainUi();
+
         }
     }
 }
