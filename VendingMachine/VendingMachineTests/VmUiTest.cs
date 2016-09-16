@@ -1,4 +1,5 @@
-﻿using VendingMachine;
+﻿using System.Collections.Generic;
+using VendingMachine;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VendingMachineTests
@@ -6,68 +7,72 @@ namespace VendingMachineTests
     [TestClass]
     public class VmUiTest
     {
+        VmUi _testUi;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            VmCoinValidator validator = new VmCoinValidator();
+            VmCoinReturn coinReturn = new VmCoinReturn();
+            IConsole mockConsole = new MockGetInput();
+            _testUi = new VmUi(new VmCoinSlot(new List<string>(), coinReturn, validator), validator, coinReturn, new VmFoodDispenser(), new VmFoodSlot(), mockConsole);
+        }
+
         [TestMethod]
         public void TestMainUiIsCalled()
         {
-            VmUi testUi = new VmUi();
-            testUi.ShowMainUi();
-            Assert.IsTrue(testUi.GetMainUiWasShown());
+            _testUi.ShowMainUi();
+            Assert.IsTrue(_testUi.GetMainUiWasShown());
         }
 
         [TestMethod]
         public void TestInsertCoinUiIsCalled()
         {
-            VmUi testUi = new VmUi();
-            testUi.ShowInsertCoinUi();
-            Assert.IsTrue(testUi.GetInsertCoinUiWasShown());
+            _testUi.ShowInsertCoinUi();
+            Assert.IsTrue(_testUi.GetInsertCoinUiWasShown());
         }
         
         [TestMethod]
         public void TestCoinReturnUiIsCalled()
         {
-            VmUi testUi = new VmUi();
-            testUi.ShowCoinReturnUi();
-            Assert.IsTrue(testUi.GetCoinReturnUiWasShown());
+            _testUi.ShowCoinReturnUi();
+            Assert.IsTrue(_testUi.GetCoinReturnUiWasShown());
         }
 
         [TestMethod]
         public void TestCoinReturnCallsMainUiIfEmpty()
         {
-            VmUi testUi = new VmUi();
-            Assert.IsFalse(testUi.GetMainUiWasShown());
+            Assert.IsFalse(_testUi.GetMainUiWasShown());
 
-            testUi.ShowCoinReturnUi();
+            _testUi.ShowCoinReturnUi();
 
-            Assert.IsTrue(testUi.GetCoinReturnUiWasShown());
-            Assert.IsTrue(testUi.GetMainUiWasShown());
+            Assert.IsTrue(_testUi.GetCoinReturnUiWasShown());
+            Assert.IsTrue(_testUi.GetMainUiWasShown());
         }
 
         [TestMethod]
         public void TestFoodSlotUiIsCalled()
         {
-            VmUi testUi = new VmUi();
-            testUi.ShowFoodSlotUi();
-            Assert.IsTrue(testUi.GetFoodSlotUiWasShown());
+            _testUi.ShowFoodSlotUi();
+            Assert.IsTrue(_testUi.GetFoodSlotUiWasShown());
         }
 
         [TestMethod]
         public void TestFoodSlotUiCallsMainUiIfEmpty()
         {
-            VmUi testUi = new VmUi();
-            Assert.IsFalse(testUi.GetMainUiWasShown());
+            Assert.IsFalse(_testUi.GetMainUiWasShown());
 
-            testUi.ShowFoodSlotUi();
+            _testUi.ShowFoodSlotUi();
 
-            Assert.IsTrue(testUi.GetFoodSlotUiWasShown());
-            Assert.IsTrue(testUi.GetMainUiWasShown());
+            Assert.IsTrue(_testUi.GetFoodSlotUiWasShown());
+            Assert.IsTrue(_testUi.GetMainUiWasShown());
         }
 
         [TestMethod]
         public void TestDisplayUiIsCalled()
         {
-            VmUi testUi = new VmUi();
-            testUi.ShowDisplayUi();
-            Assert.IsTrue(testUi.GetDisplayUiWasShown());
+            _testUi.ShowDisplayUi();
+            Assert.IsTrue(_testUi.GetDisplayUiWasShown());
         }
     }
 }

@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockGetInput.cs" />
+    <Compile Include="VmGetInput.cs" />
+    <Compile Include="IConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendingMachineMain.cs" />
     <Compile Include="VmUi.cs" />

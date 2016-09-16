@@ -10,9 +10,20 @@ namespace VendingMachine
     {
         static void Main(string[] args)
         {
-            VmUi ui = new VmUi();
-            ui.ShowMainUi();
+            StartMachine();
+        }
 
+        private static void StartMachine()
+        {
+            VmCoinValidator coinValidator = new VmCoinValidator();
+            VmCoinReturn coinReturn = new VmCoinReturn();
+            VmCoinSlot coinSlot = new VmCoinSlot(new List<string>(), coinReturn, coinValidator);
+            VmFoodDispenser foodDispenser = new VmFoodDispenser();
+            VmFoodSlot foodSlot = new VmFoodSlot();
+            IConsole console = new VmGetInput();
+            VmUi mainUi = new VmUi(coinSlot, coinValidator, coinReturn, foodDispenser, foodSlot, console);
+            foodDispenser.Restock();
+            mainUi.ShowMainUi();
         }
     }
 }
