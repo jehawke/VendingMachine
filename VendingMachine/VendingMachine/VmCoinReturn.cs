@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace VendingMachine
 {
@@ -8,6 +9,7 @@ namespace VendingMachine
 
         public void ReceiveCoin(string rejectedCoin)
         {
+            Console.WriteLine("You hear a *clink* as a coin falls into the coin return.");
             _coinsInReturn.Add(rejectedCoin);
         }
 
