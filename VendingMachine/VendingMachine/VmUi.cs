@@ -40,6 +40,7 @@ namespace VendingMachine
 
         public void ShowMainUi()
         {
+            Console.Clear();
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("______________________VENDING MACHINE_______________________");
@@ -50,6 +51,9 @@ namespace VendingMachine
             Console.WriteLine("| (T) Take Item (" + _foodSlot.GetListOfItemsInSlot().Count + " items)        (N) Coin Return (" + _coinReturn.CheckReturn().Count + " items) |");
             Console.WriteLine("____________________________________________________________");
             Console.WriteLine("");
+
+            _display.InsertCoinMessage();
+
             Console.WriteLine("Enter the letter of the item you wish to access");
             Console.WriteLine("-OR-");
             Console.WriteLine("Enter 'Display' at any time to check the display, or 'E' to Exit.");
@@ -91,6 +95,9 @@ namespace VendingMachine
                     break;
                 case ("E"):
                     break;
+                default:
+                    InvalidInput();
+                    break;
             }
 
         }
@@ -99,13 +106,17 @@ namespace VendingMachine
         {
             Console.WriteLine("");
             Console.WriteLine("");
+
+            _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+
+            Console.WriteLine("");
             Console.WriteLine("You rummage through your pockets looking for a ");
             Console.WriteLine("(Q)uarter" + ", " + "(N)ickel" + ", or " + "(D)ime");
             Console.WriteLine("");
-            //Console.WriteLine("The Display reads: " + "[" + _display.CheckDisplay() + "]");
             Console.WriteLine("What will you insert in the coin slot?");
 
             _showInsertCoinUiWasCalled = true;
+
             _entry = _console.ReadLine();
             if (_entry == "DISPLAY")
             {
@@ -122,7 +133,9 @@ namespace VendingMachine
         {
             Console.WriteLine("");
             Console.WriteLine("");
-            Console.WriteLine("The Display reads: " + "SOMETHING");
+            
+            _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+
             Console.WriteLine("Will you insert more coins? (Y/N)");
 
             _showInsertCoinUiWasCalled = true;
@@ -135,7 +148,7 @@ namespace VendingMachine
                 case ("N"):
                     ShowMainUi();
                     break;
-                case ("P"):
+                case ("DISPLAY"):
                     ShowDisplayUi();
                     break;
                 case ("E"):
@@ -179,7 +192,7 @@ namespace VendingMachine
                 case ("R"):
                     ShowMainUi();
                     break;
-                case ("P"):
+                case ("DISPLAY"):
                     ShowDisplayUi();
                     break;
                 case ("E"):
@@ -238,7 +251,7 @@ namespace VendingMachine
         public void ShowDisplayUi()
         {
             Console.WriteLine("");
-            //Console.WriteLine("The Display Reads: " + "[" + _display.CheckDisplay() + "]");
+           
             Console.WriteLine("Press any key to return to the machine...");
             _console.ReadLine();
             ShowMainUi();

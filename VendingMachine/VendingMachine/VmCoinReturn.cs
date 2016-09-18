@@ -9,7 +9,10 @@ namespace VendingMachine
 
         public void ReceiveCoin(List<string> rejectedCoin)
         {
-            Console.WriteLine("You hear a *clink* as something falls into the coin return.");
+            if (rejectedCoin.Count>0)
+            {
+                Console.WriteLine("You hear a *clink* as something falls into the coin return.");
+            }
             rejectedCoin.ForEach(_coinsInReturn.Add);
         }
 

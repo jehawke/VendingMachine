@@ -87,10 +87,18 @@ namespace VendingMachineTests
             Assert.AreEqual("N", _testValidator.GetNickelDefinition());
         }
 
+        [TestMethod]
+        public void TestCurrentTransactionClearedWhenPurchaseIsComplete()
+        {
+            _testValidator.ValidateCoin("Q");
+            Assert.AreEqual(25, _testValidator.GetCurrentTransactionTotal());
+            _testValidator.CompleteTransaction();
+            Assert.AreEqual(0, _testValidator.GetCurrentTransactionTotal());
+        }
+
         private void CheckTransactionTotal(int expectedTotal)
         {
             Assert.AreEqual(expectedTotal,_testValidator.GetCurrentTransactionTotal());
         }
-
     }
 }

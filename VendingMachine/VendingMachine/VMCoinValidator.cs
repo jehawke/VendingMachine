@@ -49,5 +49,10 @@ namespace VendingMachine
         {
             return DIME_STRING;
         }
+
+        public void CompleteTransaction()
+        {
+            _currentTransactionTotal = 0;
+        }
     }
 }

@@ -48,6 +48,7 @@ namespace VendingMachine
         {
             _listOfCoinsInCurrentTransaction.ForEach(SendCoinToReturn);
             _listOfCoinsInCurrentTransaction.Clear();
+            _validator.CompleteTransaction();
         }
     }
 }

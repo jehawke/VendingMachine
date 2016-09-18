@@ -51,12 +51,15 @@ namespace VendingMachine
             {
                 case SODA_STRING:
                     DispenseSoda(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    validator.CompleteTransaction();
                     return true;
                 case CHIPS_STRING:
                     DispenseChips(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    validator.CompleteTransaction();
                     return true;
                 case CANDY_STRING:
                     DispenseCandy(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    validator.CompleteTransaction();
                     return true;
                 default:
                     return false;
