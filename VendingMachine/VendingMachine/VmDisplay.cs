@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
+﻿
 namespace VendingMachine
 {
     public class VmDisplay

@@ -23,31 +23,27 @@ namespace VendingMachine
         public bool Dispense(string itemToDispense, VmCoinValidator validator, VmCoinBank coinBank, VmFoodSlot foodSlot, VmDisplay display)
         {
             int currentTransactionTotal = validator.GetCurrentTransactionTotal();
-            if (itemToDispense == SODA_STRING)
+
+            if (itemToDispense == SODA_STRING && _soda.Count == 0 || itemToDispense == CHIPS_STRING && _chips.Count == 0 ||
+                itemToDispense == CANDY_STRING && _candy.Count == 0)
             {
-                DispenseSoda(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
-                return true;
+                display.SoldOutMessage();
+                return false;
             }
-            if (itemToDispense == CHIPS_STRING && _chips.Count > 0 && currentTransactionTotal >= CHIPS_COST)
+            switch (itemToDispense)
             {
-                _chips.Remove(CHIPS_STRING);
-                foodSlot.AcceptFood(itemToDispense);
-                coinBank.MakeChange(currentTransactionTotal - CHIPS_COST);
-                return true;
+                case SODA_STRING:
+                    DispenseSoda(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    return true;
+                case CHIPS_STRING:
+                    DispenseChips(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    return true;
+                case CANDY_STRING:
+                    DispenseCandy(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
+                    return true;
+                default:
+                    return false;
             }
-            if (itemToDispense == CANDY_STRING && _candy.Count > 0 && currentTransactionTotal >= CANDY_COST)
-            {
-                _candy.Remove(CANDY_STRING);
-                foodSlot.AcceptFood(itemToDispense);
-                coinBank.MakeChange(currentTransactionTotal - CANDY_COST);
-                return true;
-            }
-            if (itemToDispense == SODA_STRING && _soda.Count > 0 || itemToDispense == CHIPS_STRING && _chips.Count > 0 ||
-                itemToDispense == CANDY_STRING && _candy.Count > 0)
-            {
-                
-            }
-            return false;
         }
 
         public void Restock()
@@ -73,16 +69,52 @@ namespace VendingMachine
         {
             if (_soda.Count == 0)
             {
-                //TODO
+                display.SoldOutMessage();
             }
             else if (currentTransactionTotal < SODA_COST)
             {
-                //TODO
+                display.PriceMessage(SODA_COST);
             }
             else
             {
                 _soda.Remove(SODA_STRING);
                 coinBank.MakeChange(currentTransactionTotal - SODA_COST);
+                foodSlot.AcceptFood(itemToDispense);
+            }
+        }
+
+        private void DispenseChips(int currentTransactionTotal, VmCoinBank coinBank, VmFoodSlot foodSlot, string itemToDispense, VmDisplay display)
+        {
+            if (_chips.Count == 0)
+            {
+                display.SoldOutMessage();
+            }
+            else if (currentTransactionTotal < CHIPS_COST)
+            {
+                display.PriceMessage(SODA_COST);
+            }
+            else
+            {
+                _chips.Remove(CHIPS_STRING);
+                coinBank.MakeChange(currentTransactionTotal - CHIPS_COST);
+                foodSlot.AcceptFood(itemToDispense);
+            }
+        }
+
+        private void DispenseCandy(int currentTransactionTotal, VmCoinBank coinBank, VmFoodSlot foodSlot, string itemToDispense, VmDisplay display)
+        {
+            if (_candy.Count == 0)
+            {
+                display.SoldOutMessage();
+            }
+            else if (currentTransactionTotal < CANDY_COST)
+            {
+                display.PriceMessage(SODA_COST);
+            }
+            else
+            {
+                _candy.Remove(CANDY_STRING);
+                coinBank.MakeChange(currentTransactionTotal - CANDY_COST);
                 foodSlot.AcceptFood(itemToDispense);
             }
         }

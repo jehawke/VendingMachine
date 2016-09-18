@@ -76,6 +76,7 @@ namespace VendingMachineTests
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
             Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
+            Assert.AreEqual(4, _testFoodDispenser.GetInventory()[0].Count);
         }
 
         [TestMethod]
@@ -85,6 +86,7 @@ namespace VendingMachineTests
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
             Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
+            Assert.AreEqual(4, _testFoodDispenser.GetInventory()[1].Count);
         }
 
         [TestMethod]
@@ -94,12 +96,13 @@ namespace VendingMachineTests
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
             Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
+            Assert.AreEqual(4, _testFoodDispenser.GetInventory()[2].Count);
         }
 
         [TestMethod]
-        public void TestFoodDispenserReturnsFalseWhenItHasNoItemToDispense()
+        public void TestFoodDispenserDoesNotDispenseWhenItHasNoItemToDispense()
         {
-            string testItem = "C";
+            string testItem = "S";
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(0,_inventoryToTest.Count);
             InsertCoinsForTesting();
@@ -107,12 +110,18 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
-        public void TestFoodDispenserReturnsFalseWhenPassedAnItemItWillNeverHaveInStock()
+
+        public void TestFoodDispenserRestocks()
         {
-            string testItem = "Steak";
             _testFoodDispenser.Restock();
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(3, _inventoryToTest.Count);
+        }
+
+        [TestMethod]
+        public void TestFoodDispenserReturnsFalseWhenPassedAnItemItWillNeverHaveInStock()
+        {
+            string testItem = "Steak";
             InsertCoinsForTesting();
             Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
