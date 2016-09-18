@@ -26,7 +26,7 @@ namespace VendingMachineTests
             _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
             _foodSlot = new VmFoodSlot();
             _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
-            _display = new VmDisplay(_validator, new MockGetInput());
+            _display = new VmDisplay(new MockGetInput());
         }
 
         [TestCleanup]

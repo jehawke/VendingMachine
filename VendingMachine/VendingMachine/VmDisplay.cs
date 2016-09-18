@@ -6,34 +6,25 @@ namespace VendingMachine
     public class VmDisplay
     {
         private const string THANK_YOU = "THANK YOU";
+        private const string SOLD_OUT = "SOLD OUT";
+        private const string EXACT_CHANGE = "EXACT CHANGE ONLY";
+        private const string INSERT_COIN = "INSERT COIN";
         private readonly IConsole _console;
-        private string _displayString;
-        private readonly VmCoinValidator _validator;
 
-        public VmDisplay(VmCoinValidator validator, IConsole console)
+
+        public VmDisplay(IConsole console)
         {
-            _validator = validator;
             _console = console;
         }
-
-
-        /*        private void SetDisplay()
-                {
-                    if (_validator.GetCurrentTransactionTotal() > 0)
-                    {
-                        _validator.GetCurrentTransactionTotal()
-                        _displayString = _validator.GetCurrentTransactionTotal().ToString();
-                        _displayString = _displayString.Insert(_displayString.Length -2, ".");
-                    }
-                    else
-                    {
-                        _displayString = "INSERT COIN";
-                    }
-                }*/
 
         public void ThankYouMessage()
         {
             DisplayMessage(THANK_YOU);
+        }
+
+        public void SoldOutMessage()
+        {
+            DisplayMessage(SOLD_OUT);
         }
 
         private void DisplayMessage(string message)
@@ -41,10 +32,24 @@ namespace VendingMachine
             _console.WriteLine("The Display Reads: " + "[" + message + "]");
         }
 
-/*        public string CheckDisplay()
+        public void PriceMessage(int priceOfProduct)
         {
-            SetDisplay();
-            return _displayString;
-        }*/
+            _console.WriteLine("The Display Reads: " + "[PRICE: " + priceOfProduct + "]");
+        }
+
+        public void ExactChangeMessage()
+        {
+            DisplayMessage(EXACT_CHANGE);
+        }
+
+        public void InsertCoinMessage()
+        {
+            DisplayMessage(INSERT_COIN);
+        }
+
+        public void CurrentTotalMessage(int currentTransactionTotal)
+        {
+            _console.WriteLine("The Display Reads: " + "[" + currentTransactionTotal + "]");
+        }
     }
 }
