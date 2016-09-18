@@ -14,6 +14,12 @@ namespace VendingMachineTests
             _testValidator = new VmCoinValidator();
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _testValidator = null;
+        }
+
         [TestMethod]
         public void TestGetCurrentTransactionTotalReturnsTransactionTotal()
         {

@@ -17,6 +17,13 @@ namespace VendingMachineTests
             _coinsInReturn = _coinReturn.CheckReturn();
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _coinReturn = null;
+            _coinsInReturn = null;
+        }
+
         [TestMethod]
         public void TestCheckReturnReturnsListOfCoinsInReturn()
         {

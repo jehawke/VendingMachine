@@ -17,9 +17,10 @@ namespace VendingMachine
         private readonly VmFoodSlot _foodSlot;
         private readonly VmCoinBank _coinBank;
         private readonly IConsole _console;
+        private readonly VmDisplay _display;
         private string _entry;
 
-        public VmUi(VmCoinSlot coinSlot, VmCoinValidator coinValidator, VmCoinReturn coinReturn, VmFoodDispenser foodDispenser, VmFoodSlot foodSlot, VmCoinBank coinBank, IConsole console)
+        public VmUi(VmCoinSlot coinSlot, VmCoinValidator coinValidator, VmCoinReturn coinReturn, VmFoodDispenser foodDispenser, VmFoodSlot foodSlot, VmCoinBank coinBank, IConsole console, VmDisplay display)
         {
             _coinSlot = coinSlot;
             _coinValidator = coinValidator;
@@ -28,7 +29,8 @@ namespace VendingMachine
             _foodSlot = foodSlot;
             _coinBank = coinBank;
             _console = console;
-            
+            _display = display;
+
             _showMainUiWasCalled = false;
             _showInsertCoinUiWasCalled = false;
             _showDisplayUiWasShown = false;
@@ -67,7 +69,7 @@ namespace VendingMachine
                 case ("S"):
                 case ("H"):
                 case ("C"):
-                    if (_foodDispenser.Dispense(_entry, _coinValidator, _coinBank, _foodSlot))
+                    if (_foodDispenser.Dispense(_entry, _coinValidator, _coinBank, _foodSlot, _display))
                     {
                         Console.WriteLine("You hear a *thunk* as an item lands in the Food Slot.");
                         ShowFoodSlotUi();
@@ -84,7 +86,7 @@ namespace VendingMachine
                 case ("N"):
                     ShowCoinReturnUi();
                     break;
-                case ("Display"):
+                case ("DISPLAY"):
                     ShowDisplayUi();
                     break;
                 case ("E"):
@@ -100,7 +102,7 @@ namespace VendingMachine
             Console.WriteLine("You rummage through your pockets looking for a ");
             Console.WriteLine("(Q)uarter" + ", " + "(N)ickel" + ", or " + "(D)ime");
             Console.WriteLine("");
-            Console.WriteLine("The Display reads: " + "SOMETHING");
+            //Console.WriteLine("The Display reads: " + "[" + _display.CheckDisplay() + "]");
             Console.WriteLine("What will you insert in the coin slot?");
 
             _showInsertCoinUiWasCalled = true;
@@ -236,7 +238,7 @@ namespace VendingMachine
         public void ShowDisplayUi()
         {
             Console.WriteLine("");
-            Console.WriteLine("The Display Reads: " + "[" + "INSERT COIN" + " " + "0.00" + "]");
+            //Console.WriteLine("The Display Reads: " + "[" + _display.CheckDisplay() + "]");
             Console.WriteLine("Press any key to return to the machine...");
             _console.ReadLine();
             ShowMainUi();

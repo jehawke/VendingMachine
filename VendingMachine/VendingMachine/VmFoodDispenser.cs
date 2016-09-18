@@ -20,14 +20,12 @@ namespace VendingMachine
 
         private readonly List<List<string>> _inventory = new List<List<string>>();
 
-        public bool Dispense(string itemToDispense,VmCoinValidator validator, VmCoinBank coinBank, VmFoodSlot foodSlot)
+        public bool Dispense(string itemToDispense, VmCoinValidator validator, VmCoinBank coinBank, VmFoodSlot foodSlot, VmDisplay display)
         {
             int currentTransactionTotal = validator.GetCurrentTransactionTotal();
-            if (itemToDispense == SODA_STRING && _soda.Count > 0 && currentTransactionTotal >= SODA_COST)
+            if (itemToDispense == SODA_STRING)
             {
-                _soda.Remove(SODA_STRING);
-                foodSlot.AcceptFood(itemToDispense);
-                coinBank.MakeChange(currentTransactionTotal - SODA_COST);
+                DispenseSoda(currentTransactionTotal, coinBank, foodSlot, itemToDispense, display);
                 return true;
             }
             if (itemToDispense == CHIPS_STRING && _chips.Count > 0 && currentTransactionTotal >= CHIPS_COST)
@@ -43,6 +41,11 @@ namespace VendingMachine
                 foodSlot.AcceptFood(itemToDispense);
                 coinBank.MakeChange(currentTransactionTotal - CANDY_COST);
                 return true;
+            }
+            if (itemToDispense == SODA_STRING && _soda.Count > 0 || itemToDispense == CHIPS_STRING && _chips.Count > 0 ||
+                itemToDispense == CANDY_STRING && _candy.Count > 0)
+            {
+                
             }
             return false;
         }
@@ -64,6 +67,24 @@ namespace VendingMachine
         public List<List<string>> GetInventory()
         {
             return _inventory;
+        }
+
+        private void DispenseSoda(int currentTransactionTotal, VmCoinBank coinBank, VmFoodSlot foodSlot, string itemToDispense, VmDisplay display)
+        {
+            if (_soda.Count == 0)
+            {
+                //TODO
+            }
+            else if (currentTransactionTotal < SODA_COST)
+            {
+                //TODO
+            }
+            else
+            {
+                _soda.Remove(SODA_STRING);
+                coinBank.MakeChange(currentTransactionTotal - SODA_COST);
+                foodSlot.AcceptFood(itemToDispense);
+            }
         }
     }
 }

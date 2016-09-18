@@ -8,5 +8,15 @@ namespace VendingMachine
         {
             return Console.ReadLine().ToUpper();
         }
+
+        public void WriteLine(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public string GetLastMessageDisplayed()
+        {
+            return null;
+        }
     }
 }

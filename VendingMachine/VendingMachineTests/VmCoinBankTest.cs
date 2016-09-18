@@ -21,8 +21,17 @@ namespace VendingMachineTests
             _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
             _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
         }
-        
-        
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _coinReturn = null;
+            _validator = null;
+            _coinSlot = null;
+            _coinBank = null;
+        }
+
+
         [TestMethod]
         public void TestCoinBankCanAddCoins()
         {

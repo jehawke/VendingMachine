@@ -15,6 +15,12 @@ namespace VendingMachineTests
             _foodSlot = new VmFoodSlot();
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _foodSlot = null;
+        }
+
         [TestMethod]
         public void TestGetItemsReturnsListOfItemsInFoodSlot()
         {

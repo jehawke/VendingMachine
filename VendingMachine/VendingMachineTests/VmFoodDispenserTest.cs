@@ -14,6 +14,7 @@ namespace VendingMachineTests
         private VmFoodSlot _foodSlot;
         private VmCoinSlot _coinSlot;
         private VmCoinBank _coinBank;
+        private VmDisplay _display;
 
         [TestInitialize]
         public void Initialize()
@@ -25,6 +26,20 @@ namespace VendingMachineTests
             _coinSlot = new VmCoinSlot(new List<string>(), _coinReturn, _validator);
             _foodSlot = new VmFoodSlot();
             _coinBank = new VmCoinBank(new List<string>(), _validator, _coinSlot, _coinReturn);
+            _display = new VmDisplay(_validator, new MockGetInput());
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _testFoodDispenser = null;
+            _inventoryToTest = null;
+            _coinReturn = null;
+            _validator = null;
+            _coinSlot = null;
+            _foodSlot = null;
+            _coinBank = null;
+            _display = null;
         }
 
         [TestMethod]
@@ -48,7 +63,7 @@ namespace VendingMachineTests
             InsertCoinsForTesting();
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(5, _inventoryToTest[0].Count);
-            _testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot);
+            _testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display);
             Assert.AreEqual(4, _inventoryToTest[0].Count);
             Assert.AreEqual(5, _inventoryToTest[1].Count);
             Assert.AreEqual(5, _inventoryToTest[2].Count);
@@ -60,7 +75,7 @@ namespace VendingMachineTests
             string testItem = "S";
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
-            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot));
+            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 
         [TestMethod]
@@ -69,7 +84,7 @@ namespace VendingMachineTests
             string testItem = "H";
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
-            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot));
+            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 
         [TestMethod]
@@ -78,7 +93,7 @@ namespace VendingMachineTests
             string testItem = "C";
             _testFoodDispenser.Restock();
             InsertCoinsForTesting();
-            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot));
+            Assert.IsTrue(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 
         [TestMethod]
@@ -88,7 +103,7 @@ namespace VendingMachineTests
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(0,_inventoryToTest.Count);
             InsertCoinsForTesting();
-            Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot));
+            Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 
         [TestMethod]
@@ -99,7 +114,7 @@ namespace VendingMachineTests
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(3, _inventoryToTest.Count);
             InsertCoinsForTesting();
-            Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot));
+            Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 
         private void InsertCoinsForTesting()

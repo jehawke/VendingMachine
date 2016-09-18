@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace VendingMachine
 {
@@ -15,14 +11,15 @@ namespace VendingMachine
 
         private static void StartMachine()
         {
+            IConsole console = new VmGetInput();
             VmCoinValidator coinValidator = new VmCoinValidator();
             VmCoinReturn coinReturn = new VmCoinReturn();
             VmCoinSlot coinSlot = new VmCoinSlot(new List<string>(), coinReturn, coinValidator);
             VmFoodDispenser foodDispenser = new VmFoodDispenser();
             VmFoodSlot foodSlot = new VmFoodSlot();
             VmCoinBank coinBank = new VmCoinBank(new List<string>(),coinValidator, coinSlot, coinReturn);
-            IConsole console = new VmGetInput();
-            VmUi mainUi = new VmUi(coinSlot, coinValidator, coinReturn, foodDispenser, foodSlot, coinBank, console);
+            VmDisplay display = new VmDisplay(coinValidator, console);
+            VmUi mainUi = new VmUi(coinSlot, coinValidator, coinReturn, foodDispenser, foodSlot, coinBank, console, display);
             foodDispenser.Restock();
             mainUi.ShowMainUi();
         }
