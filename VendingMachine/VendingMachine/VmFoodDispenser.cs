@@ -102,7 +102,7 @@ namespace VendingMachine
             {
                 _soda.Remove(SODA_STRING);
                 coinBank.MakeChange(currentTransactionTotal - SODA_COST);
-                foodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood("Soda");
             }
         }
 
@@ -120,7 +120,7 @@ namespace VendingMachine
             {
                 _chips.Remove(CHIPS_STRING);
                 coinBank.MakeChange(currentTransactionTotal - CHIPS_COST);
-                foodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood("Chips");
             }
         }
 
@@ -138,7 +138,7 @@ namespace VendingMachine
             {
                 _candy.Remove(CANDY_STRING);
                 coinBank.MakeChange(currentTransactionTotal - CANDY_COST);
-                foodSlot.AcceptFood(itemToDispense);
+                foodSlot.AcceptFood("Candy");
             }
         }
     }
