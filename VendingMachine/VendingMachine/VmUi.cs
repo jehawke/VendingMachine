@@ -120,7 +120,20 @@ namespace VendingMachine
             Console.WriteLine("");
             Console.WriteLine("");
 
-            _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+
+            if (_coinValidator.GetCurrentTransactionTotal() > 0)
+            {
+                _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+            }
+            else if (!_coinBank.CanMakeChange())
+            {
+                _display.ExactChangeMessage();
+            }
+            else
+            {
+                _display.InsertCoinMessage();
+            }
+
 
             Console.WriteLine("");
             Console.WriteLine("You rummage through your pockets looking for a ");
@@ -146,9 +159,6 @@ namespace VendingMachine
         {
             Console.WriteLine("");
             Console.WriteLine("");
-            
-            _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
-
             Console.WriteLine("Will you insert more coins? (Y/N)");
 
             _showInsertCoinUiWasCalled = true;
@@ -247,7 +257,7 @@ namespace VendingMachine
                     case ("R"):
                         ShowMainUi();
                         break;
-                    case ("P"):
+                    case ("DISPLAY"):
                         ShowDisplayUi();
                         break;
                     case ("E"):
@@ -264,7 +274,18 @@ namespace VendingMachine
         public void ShowDisplayUi()
         {
             Console.WriteLine("");
-           
+            if (_coinValidator.GetCurrentTransactionTotal() > 0)
+            {
+                _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+            }
+            else if (!_coinBank.CanMakeChange())
+            {
+                _display.ExactChangeMessage();
+            }
+            else
+            {
+                _display.InsertCoinMessage();
+            }
             Console.WriteLine("Press any key to return to the machine...");
             _console.ReadLine();
             ShowMainUi();
