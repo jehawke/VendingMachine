@@ -110,12 +110,14 @@ namespace VendingMachineTests
         }
 
         [TestMethod]
-
         public void TestFoodDispenserRestocks()
         {
             _testFoodDispenser.Restock();
             _inventoryToTest = _testFoodDispenser.GetInventory();
             Assert.AreEqual(3, _inventoryToTest.Count);
+            Assert.AreEqual(5, _inventoryToTest[0].Count);
+            Assert.AreEqual(5, _inventoryToTest[1].Count);
+            Assert.AreEqual(5, _inventoryToTest[2].Count);
         }
 
         [TestMethod]
@@ -123,6 +125,14 @@ namespace VendingMachineTests
         {
             string testItem = "Steak";
             InsertCoinsForTesting();
+            Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
+        }
+
+        [TestMethod]
+        public void TestFoodDispenserReturnsFalseWhenCustomerHasNotDepositedEnoughMoney()
+        {
+            string testItem = "S";
+            _testFoodDispenser.Restock();
             Assert.IsFalse(_testFoodDispenser.Dispense(testItem, _validator, _coinBank, _foodSlot, _display));
         }
 

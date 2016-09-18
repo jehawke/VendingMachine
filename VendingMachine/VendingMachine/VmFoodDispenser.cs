@@ -30,6 +30,23 @@ namespace VendingMachine
                 display.SoldOutMessage();
                 return false;
             }
+
+            if (itemToDispense == SODA_STRING && currentTransactionTotal < SODA_COST)
+            {
+                display.PriceMessage(SODA_COST);
+                return false;
+            }
+            if (itemToDispense == CHIPS_STRING && currentTransactionTotal < CHIPS_COST)
+            {
+                display.PriceMessage(SODA_COST);
+                return false;
+            }
+            if (itemToDispense == CANDY_STRING && currentTransactionTotal < CANDY_COST)
+            {
+                display.PriceMessage(SODA_COST);
+                return false;
+            }
+
             switch (itemToDispense)
             {
                 case SODA_STRING:
