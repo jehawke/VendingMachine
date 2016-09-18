@@ -98,7 +98,7 @@ namespace VendingMachine
                     else
                     {
                         Console.WriteLine("Nothing happens.");
-                        ShowDisplayUi();
+                        ShowRedirectUi();
                     }
                     break;
                 case ("T"):
