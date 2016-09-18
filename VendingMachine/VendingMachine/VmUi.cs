@@ -55,7 +55,11 @@ namespace VendingMachine
             Console.WriteLine("____________________________________________________________");
             Console.WriteLine("");
 
-            if (!_coinBank.CanMakeChange())
+            if (_coinValidator.GetCurrentTransactionTotal() > 0)
+            {
+                _display.CurrentTotalMessage(_coinValidator.GetCurrentTransactionTotal());
+            }
+            else if (!_coinBank.CanMakeChange())
             {
                 _display.ExactChangeMessage();
             }
