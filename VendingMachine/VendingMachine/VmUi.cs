@@ -40,7 +40,10 @@ namespace VendingMachine
 
         public void ShowMainUi()
         {
-            Console.Clear();
+            if (!Console.IsOutputRedirected)
+            {
+                Console.Clear();
+            }
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("______________________VENDING MACHINE_______________________");
@@ -52,7 +55,14 @@ namespace VendingMachine
             Console.WriteLine("____________________________________________________________");
             Console.WriteLine("");
 
-            _display.InsertCoinMessage();
+            if (!_coinBank.CanMakeChange())
+            {
+                _display.ExactChangeMessage();
+            }
+            else
+            {
+                _display.InsertCoinMessage();
+            }
 
             Console.WriteLine("Enter the letter of the item you wish to access");
             Console.WriteLine("-OR-");
@@ -96,7 +106,10 @@ namespace VendingMachine
                 case ("E"):
                     break;
                 default:
-                    InvalidInput();
+                    if (!Console.IsOutputRedirected)
+                    {
+                        InvalidInput();
+                    }
                     break;
             }
 

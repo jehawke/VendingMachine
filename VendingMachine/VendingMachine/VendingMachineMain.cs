@@ -20,6 +20,7 @@ namespace VendingMachine
             VmCoinBank coinBank = new VmCoinBank(new List<string>(),coinValidator, coinSlot, coinReturn);
             VmDisplay display = new VmDisplay(console);
             VmUi mainUi = new VmUi(coinSlot, coinValidator, coinReturn, foodDispenser, foodSlot, coinBank, console, display);
+            coinBank.Restock();
             foodDispenser.Restock();
             mainUi.ShowMainUi();
         }

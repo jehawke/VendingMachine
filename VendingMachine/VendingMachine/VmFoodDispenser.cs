@@ -38,12 +38,12 @@ namespace VendingMachine
             }
             if (itemToDispense == CHIPS_STRING && currentTransactionTotal < CHIPS_COST)
             {
-                display.PriceMessage(SODA_COST);
+                display.PriceMessage(CHIPS_COST);
                 return false;
             }
             if (itemToDispense == CANDY_STRING && currentTransactionTotal < CANDY_COST)
             {
-                display.PriceMessage(SODA_COST);
+                display.PriceMessage(CANDY_COST);
                 return false;
             }
 

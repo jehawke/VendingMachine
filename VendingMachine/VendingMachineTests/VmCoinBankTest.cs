@@ -61,5 +61,21 @@ namespace VendingMachineTests
             Assert.AreEqual(1,_coinBank.GetListOfCoinsInBank().Count);
             Assert.AreEqual("Q",_coinBank.GetListOfCoinsInBank()[0]);
         }
+
+        [TestMethod]
+        public void TestCoinBankKnowsWhenItCannotMakeChange()
+        {
+            Assert.IsFalse(_coinBank.CanMakeChange());
+
+            List<string> testTransaction = new List<string> { "D", "N"};
+            _coinBank.AcceptMoney(testTransaction);
+
+            Assert.IsFalse(_coinBank.CanMakeChange());
+
+            testTransaction.Add("Q");
+            _coinBank.AcceptMoney(testTransaction);
+
+            Assert.IsTrue(_coinBank.CanMakeChange());
+        }
    }
 }

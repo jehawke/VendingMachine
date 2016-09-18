@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace VendingMachine
@@ -79,6 +80,11 @@ namespace VendingMachine
         {
             coinsToBank.ForEach(_coinsInBank.Add);
             coinsToBank.Clear();
+        }
+
+        public bool CanMakeChange()
+        {
+            return _coinsInBank.Distinct().Count() == 3;
         }
     }
 }
