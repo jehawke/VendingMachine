@@ -101,5 +101,12 @@ namespace VendingMachineTests
             _testUi.ShowDisplayUi();
             Assert.IsTrue(_testUi.GetDisplayUiWasShown());
         }
+
+        [TestMethod]
+        public void TestRedirectUiIsCalled()
+        {
+            _testUi.ShowRedirectUi();
+            Assert.IsTrue(_testUi.GetRedirectUiWasShown());
+        }
     }
 }

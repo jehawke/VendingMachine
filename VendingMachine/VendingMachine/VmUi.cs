@@ -6,9 +6,10 @@ namespace VendingMachine
     {
         private bool _showMainUiWasCalled;
         private bool _showInsertCoinUiWasCalled;
-        private bool _showDisplayUiWasShown;
+        private bool _showDisplayUiWasCalled;
         private bool _showCoinReturnUiWasCalled;
         private bool _showFoodSlotUiWasCalled;
+        private bool _showRedirectUiWasCalled;
 
         private readonly VmCoinSlot _coinSlot;
         private readonly VmCoinValidator _coinValidator;
@@ -19,6 +20,7 @@ namespace VendingMachine
         private readonly IConsole _console;
         private readonly VmDisplay _display;
         private string _entry;
+
 
         public VmUi(VmCoinSlot coinSlot, VmCoinValidator coinValidator, VmCoinReturn coinReturn, VmFoodDispenser foodDispenser, VmFoodSlot foodSlot, VmCoinBank coinBank, IConsole console, VmDisplay display)
         {
@@ -33,9 +35,10 @@ namespace VendingMachine
 
             _showMainUiWasCalled = false;
             _showInsertCoinUiWasCalled = false;
-            _showDisplayUiWasShown = false;
+            _showDisplayUiWasCalled = false;
             _showCoinReturnUiWasCalled = false;
             _showFoodSlotUiWasCalled = false;
+            _showRedirectUiWasCalled = false;
         }
 
         public void ShowMainUi()
@@ -290,13 +293,21 @@ namespace VendingMachine
             {
                 _display.InsertCoinMessage();
             }
+            ShowRedirectUi();
+
+            _showDisplayUiWasCalled = true;
+        }
+
+
+        public void ShowRedirectUi()
+        {
             Console.WriteLine("Press any key to return to the machine...");
             _console.ReadLine();
             ShowMainUi();
 
-            _showDisplayUiWasShown = true;
+            _showRedirectUiWasCalled = true;
         }
-        
+
         public bool GetMainUiWasShown()
         {
             return _showMainUiWasCalled;
@@ -319,13 +330,18 @@ namespace VendingMachine
 
         public bool GetDisplayUiWasShown()
         {
-            return _showDisplayUiWasShown;
+            return _showDisplayUiWasCalled;
         }
 
         private void InvalidInput()
         {
             Console.WriteLine("That input isn't recognized");
             ShowMainUi();
+        }
+
+        public bool GetRedirectUiWasShown()
+        {
+            return _showRedirectUiWasCalled;
         }
     }
 }
